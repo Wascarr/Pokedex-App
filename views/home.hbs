@@ -1,0 +1,148 @@
+<!-- views/home.hbs -->
+
+<!-- Hero Section -->
+<div class="hero-section text-white py-5 mb-4 rounded-3 shadow">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h1 class="display-4 fw-bold">Pokédex</h1>
+                <p class="lead">Explora y gestiona tu colección de Pokémon</p>
+            </div>
+            <div class="col-lg-4 text-end">
+                <a href="/pokemon/new" class="btn btn-light btn-lg">
+                    <i class="fas fa-plus"></i> Nuevo Pokémon
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Filtros -->
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <form action="/" method="GET" class="row g-3">
+            <div class="col-md-4">
+                <div class="input-group">
+                    <span class="input-group-text bg-white">
+                        <i class="fas fa-search"></i>
+                    </span>
+                    <input type="text" id="searchName" name="name" class="form-control" placeholder="Buscar Pokémon..." value="{{searchTerm}}">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <select id="regionSelect" name="regionId" class="form-select">
+                    <option value="">Todas las regiones</option>
+                    {{#each regions}}
+                        <option value="{{this.id}}" {{#if (lookup ../selectedRegions this.id)}}selected{{/if}}>
+                            {{this.name}}
+                        </option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="col-md-3">
+                <select id="typeSelect" name="typeId" class="form-select">
+                    <option value="">Todos los tipos</option>
+                    {{#each types}}
+                        <option value="{{this.id}}" {{#if (lookup ../selectedTypes this.id)}}selected{{/if}}>
+                            {{this.name}}
+                        </option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="fas fa-filter"></i> Filtrar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Grid de Pokémon -->
+<div class="row pokemon-grid">
+    {{#if pokemons.length}}
+        {{#each pokemons}}
+            <div class="col-sm-6 col-md-4 col-lg-3 mb-4" data-aos="fade-up">
+                <div class="card pokemon-card h-100 shadow-sm">
+                    <div class="card-img-wrapper">
+                        <img 
+                            src="{{this.image}}" 
+                            class="card-img-top" 
+                            alt="{{this.name}}"
+                            onerror="this.onerror=null; this.src='/images/pokemon-placeholder.png'; this.classList.add('placeholder-img');"
+                        >
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-center mb-3">{{this.name}}</h5>
+                        <div class="d-flex justify-content-between mb-3">
+                            <span class="badge bg-primary rounded-pill">
+                                <i class="fas fa-star me-1"></i> {{this.Type.name}}
+                            </span>
+                            <span class="badge bg-secondary rounded-pill">
+                                <i class="fas fa-map-marker-alt me-1"></i> {{this.Region.name}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-top-0">
+                        <div class="d-flex justify-content-between gap-2">
+                            <a href="/pokemon/{{this.id}}/edit" 
+                               class="btn btn-outline-warning btn-sm flex-grow-1"
+                               data-bs-toggle="tooltip" 
+                               title="Editar Pokémon">
+                                <i class="fas fa-edit"></i> Editar
+                            </a>
+                            <button onclick="deletePokemon({{this.id}})" 
+                                    class="btn btn-outline-danger btn-sm flex-grow-1"
+                                    data-bs-toggle="tooltip" 
+                                    title="Eliminar Pokémon">
+                                <i class="fas fa-trash"></i> Eliminar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    {{else}}
+        <div class="col-12 text-center py-5">
+            <div class="empty-state">
+                <img src="/images/empty-pokemon.png" alt="No hay Pokémon" class="mb-4" style="max-width: 200px; opacity: 0.7;">
+                <h3 class="text-muted">No se encontraron Pokémon</h3>
+                <p class="text-muted mb-4">¡Comienza agregando algunos Pokémon a tu colección!</p>
+                <a href="/pokemon/new" class="btn btn-primary btn-lg">
+                    <i class="fas fa-plus"></i> Agregar Pokémon
+                </a>
+            </div>
+        </div>
+    {{/if}}
+</div>
+
+<!-- Paginación -->
+{{#if pagination}}
+    <nav aria-label="Navegación de páginas" class="mt-4">
+        <ul class="pagination justify-content-center">
+            {{#if pagination.prev}}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{pagination.prev}}&name={{searchTerm}}&regionId={{currentRegionId}}&typeId={{currentTypeId}}">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                </li>
+            {{/if}}
+
+            {{#each pagination.pages}}
+                <li class="page-item {{#if this.active}}active{{/if}}">
+                    <a class="page-link" href="?page={{this.number}}&name={{../searchTerm}}&regionId={{../currentRegionId}}&typeId={{../currentTypeId}}">
+                        {{this.number}}
+                    </a>
+                </li>
+            {{/each}}
+
+            {{#if pagination.next}}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{pagination.next}}&name={{searchTerm}}&regionId={{currentRegionId}}&typeId={{currentTypeId}}">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </li>
+            {{/if}}
+        </ul>
+    </nav>
+{{/if}}

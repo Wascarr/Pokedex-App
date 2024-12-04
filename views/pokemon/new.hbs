@@ -1,0 +1,93 @@
+<div class="container mt-4">
+    <h2 class="mb-4">Añadir Nuevo Pokémon</h2>
+
+    {{#if error}}
+    <div class="alert alert-danger" role="alert">
+        {{error}}
+    </div>
+    {{/if}}
+
+    <form action="/pokemon/new" method="POST" class="needs-validation" novalidate>
+        <div class="mb-3">
+            <label for="name" class="form-label">Nombre:</label>
+            <input type="text" 
+                   class="form-control" 
+                   id="name" 
+                   name="name" 
+                   value="{{pokemon.name}}"
+                   required>
+            <div class="invalid-feedback">
+                Por favor ingresa un nombre
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="typeId" class="form-label">Tipo:</label>
+            <select class="form-select" id="typeId" name="typeId" required>
+                <option value="">Selecciona un tipo</option>
+                {{#each types}}
+                    <option value="{{this.id}}" {{#if (eq this.id ../pokemon.typeId)}}selected{{/if}}>
+                        {{this.name}}
+                    </option>
+                {{/each}}
+            </select>
+            <div class="invalid-feedback">
+                Por favor selecciona un tipo
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="regionId" class="form-label">Región:</label>
+            <select class="form-select" id="regionId" name="regionId" required>
+                <option value="">Selecciona una región</option>
+                {{#each regions}}
+                    <option value="{{this.id}}" {{#if (eq this.id ../pokemon.regionId)}}selected{{/if}}>
+                        {{this.name}}
+                    </option>
+                {{/each}}
+            </select>
+            <div class="invalid-feedback">
+                Por favor selecciona una región
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="image" class="form-label">URL de la imagen (opcional):</label>
+            <input type="url" 
+                   class="form-control" 
+                   id="image" 
+                   name="image"
+                   value="{{pokemon.image}}">
+            <div class="invalid-feedback">
+                Por favor ingresa una URL válida
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary me-2">
+                <i class="fas fa-save"></i> Guardar Pokémon
+            </button>
+            <a href="/" class="btn btn-secondary">
+                <i class="fas fa-times"></i> Cancelar
+            </a>
+        </div>
+    </form>
+</div>
+
+<script>
+// Validación del formulario del lado del cliente
+(function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+                form.classList.add('was-validated')
+            }, false)
+        })
+})()
+</script>

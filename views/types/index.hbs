@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2>Tipos de Pokémon</h2>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="/types/new" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Nuevo Tipo
+            </a>
+        </div>
+    </div>
+
+    {{#if types.length}}
+        <div class="row">
+            {{#each types}}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{this.name}}</h5>
+                            <div class="mt-3">
+                                <a href="/types/{{this.id}}/edit" class="btn btn-warning btn-sm">
+                                    <i class="fas fa-edit"></i> Editar
+                                </a>
+                                <button onclick="deleteType({{this.id}})" class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash"></i> Eliminar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    {{else}}
+        <div class="alert alert-info">
+            No hay tipos registrados aún.
+        </div>
+    {{/if}}
+</div>

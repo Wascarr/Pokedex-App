@@ -1,0 +1,239 @@
+/* Estilos generales */
+body {
+    background-color: #f8f9fa;
+    padding-top: 60px; /* Ajuste para la navbar fija */
+}
+
+.navbar-spacer {
+    height: 56px; /* Altura de la navbar */
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(45deg, #dc3545, #ff6b6b);
+    color: white;
+    padding: 3rem 0;
+    margin-bottom: 2rem;
+}
+
+/* Filtros */
+.card.shadow-sm {
+    border: none;
+    border-radius: 15px;
+}
+
+/* Estilos de las tarjetas de Pokémon */
+.pokemon-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.pokemon-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.card-img-wrapper {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f1f3f5;
+    overflow: hidden;
+}
+
+.card-img-top {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.card-body {
+    padding: 1.25rem;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.75rem;
+}
+
+.badge {
+    font-size: 0.8rem;
+    padding: 0.5em 0.75em;
+}
+
+.card-footer {
+    background-color: transparent;
+    border-top: 1px solid rgba(0,0,0,.125);
+    padding: 1rem;
+}
+
+/* Estilos de los botones */
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 3rem 0;
+}
+
+.empty-state img {
+    max-width: 150px;
+    opacity: 0.7;
+}
+
+/* Paginación */
+.pagination {
+    margin-top: 2rem;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.pagination .page-link {
+    color: #dc3545;
+}
+
+.pagination .page-link:hover {
+    background-color: #f8d7da;
+}
+
+/* Formularios */
+.form-control:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+/* Navbar */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+/* Footer */
+.footer {
+    margin-top: 3rem;
+    padding: 2rem 0;
+    background-color: #343a40;
+    color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .col-sm-6 {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    
+    .hero-section {
+        padding: 2rem 0;
+    }
+    
+    .card-img-wrapper {
+        height: 150px;
+    }
+}
+
+/* Dark theme */
+.dark-theme {
+    background-color: #343a40;
+    color: #f8f9fa;
+}
+
+.dark-theme .card {
+    background-color: #454d55;
+    color: #f8f9fa;
+}
+
+.dark-theme .card-footer {
+    border-top-color: #6c757d;
+}
+
+.dark-theme .btn-outline-warning {
+    color: #ffc107;
+    border-color: #ffc107;
+}
+
+.dark-theme .btn-outline-danger {
+    color: #dc3545;
+    border-color: #dc3545;
+}
+
+.dark-theme .pagination .page-link {
+    background-color: #454d55;
+    border-color: #6c757d;
+    color: #f8f9fa;
+}
+
+.dark-theme .pagination .page-item.active .page-link {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+/* Animaciones AOS */
+[data-aos] {
+    pointer-events: none;
+}
+[data-aos].aos-animate {
+    pointer-events: auto;
+}
+
+/* Tooltips personalizados */
+.tooltip .tooltip-inner {
+    background-color: #dc3545;
+}
+
+.tooltip .arrow::before {
+    border-top-color: #dc3545;
+}
+
+.card-img-wrapper {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f1f3f5;
+    overflow: hidden;
+}
+
+.card-img-top {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.placeholder-img {
+    opacity: 0.5;
+    filter: grayscale(100%);
+}
+
+/* Estilos para las tarjetas de región */
+.card {
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-title {
+    color: #333;
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-primary:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}

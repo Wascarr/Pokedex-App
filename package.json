@@ -1,0 +1,35 @@
+{
+  "name": "pokedex",
+  "version": "1.0.0",
+  "description": "Aplicación Pokédex usando Express, Sequelize y SQLite",
+  "main": "app.js",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "express-handlebars": "^5.3.5",
+    "sequelize": "^6.37.5",
+    "sqlite3": "^5.1.7",
+    "winston": "^3.16.0"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "seed": "node seeders/init-data.js",
+    "test": "jest --detectOpenHandles",
+    "test:coverage": "jest --coverage"
+  },
+  "keywords": [
+    "pokemon",
+    "pokedex",
+    "express",
+    "sequelize",
+    "sqlite"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.0",
+    "puppeteer": "^23.9.0"
+  }
+}

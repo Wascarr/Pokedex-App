@@ -1,0 +1,21 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-lg-6 mx-auto text-center">
+            <h1 class="display-4">{{pokemon.name}}</h1>
+            <img src="{{pokemon.image}}" alt="{{pokemon.name}}" class="img-fluid" onerror="this.src='/images/pokemon-placeholder.png'">
+            <div class="mt-3">
+                <span class="badge bg-primary">{{pokemon.Type.name}}</span>
+                <span class="badge bg-secondary">{{pokemon.Region.name}}</span>
+            </div>
+            <p class="mt-3">{{pokemon.description}}</p>
+            <div class="d-flex justify-content-center mt-4">
+                <a href="/pokemon/{{pokemon.id}}/edit" class="btn btn-warning me-2">
+                    <i class="fas fa-edit"></i> Editar
+                </a>
+                <button onclick="deletePokemon({{pokemon.id}})" class="btn btn-danger">
+                    <i class="fas fa-trash"></i> Eliminar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

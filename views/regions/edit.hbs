@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">Editar Región Pokémon</h2>
+                    
+                    <form action="/regions/{{region.id}}/edit" method="POST">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nombre de la Región:</label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{region.name}}" required>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Actualizar
+                            </button>
+                            <a href="/regions" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Volver
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

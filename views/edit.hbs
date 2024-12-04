@@ -1,0 +1,37 @@
+<div class="container mt-4">
+    <h1 class="display-4 text-center">Editar Pokémon</h1>
+    <form action="/pokemon/{{pokemon.id}}/update" method="POST" class="mt-4">
+        <div class="mb-3">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" id="name" name="name" class="form-control" value="{{pokemon.name}}" required>
+        </div>
+        <div class="mb-3">
+            <label for="image" class="form-label">URL de la imagen</label>
+            <input type="text" id="image" name="image" class="form-control" value="{{pokemon.image}}" required>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Descripción</label>
+            <textarea id="description" name="description" class="form-control" rows="3" required>{{pokemon.description}}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="typeSelect" class="form-label">Tipo</label>
+            <select id="typeSelect" name="typeId" class="form-select" required>
+                {{#each types}}
+                    <option value="{{this.id}}" {{#if (eq this.id ../pokemon.Type.id)}}selected{{/if}}>{{this.name}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="regionSelect" class="form-label">Región</label>
+            <select id="regionSelect" name="regionId" class="form-select" required>
+                {{#each regions}}
+                    <option value="{{this.id}}" {{#if (eq this.id ../pokemon.Region.id)}}selected{{/if}}>{{this.name}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary me-2">Guardar cambios</button>
+            <a href="/" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>

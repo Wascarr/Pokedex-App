@@ -1,0 +1,33 @@
+<h2 class="mb-4">Editar Pokémon</h2>
+
+<form action="/pokemon/{{pokemon.id}}/edit" method="POST">
+    <div class="mb-3">
+        <label for="name" class="form-label">Nombre:</label>
+        <input type="text" class="form-control" id="name" name="name" value="{{pokemon.name}}" required>
+    </div>
+    <div class="mb-3">
+        <label for="typeId" class="form-label">Tipo:</label>
+        <select class="form-select" id="typeId" name="typeId" required>
+            {{#each types}}
+                <option value="{{this.id}}" {{#if (eq this.id ../pokemon.TypeId)}}selected{{/if}}>
+                    {{this.name}}
+                </option>
+            {{/each}}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="regionId" class="form-label">Región:</label>
+        <select class="form-select" id="regionId" name="regionId" required>
+            {{#each regions}}
+                <option value="{{this.id}}" {{#if (eq this.id ../pokemon.RegionId)}}selected{{/if}}>
+                    {{this.name}}
+                </option>
+            {{/each}}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="image" class="form-label">URL de la imagen:</label>
+        <input type="url" class="form-control" id="image" name="image" value="{{pokemon.image}}">
+    </div>
+    <button type="submit" class="btn btn-primary">Actualizar Pokémon</button>
+</form>

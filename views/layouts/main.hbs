@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{#if title}}{{title}} - {{/if}}Pokédex</title>
+    
+    <!-- Meta tags -->
+    <meta name="description" content="Una Pokédex completa con información detallada sobre todos los Pokémon.">
+    <meta property="og:title" content="Pokédex">
+    <meta property="og:description" content="Explora la información de todos los Pokémon en nuestra Pokédex.">
+    
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-gamepad me-2"></i>Pokédex
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            <i class="fas fa-home"></i> Inicio
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pokemon/new">
+                            <i class="fas fa-plus-circle"></i> Nuevo Pokémon
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/regions">
+                            <i class="fas fa-globe-americas"></i> Regiones
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/types">
+                            <i class="fas fa-tags"></i> Tipos
+                        </a>
+                    </li>
+                </ul>
+                <button id="themeToggle" class="btn btn-outline-light">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Espaciador para el navbar fijo -->
+    <div class="navbar-spacer"></div>
+
+    <!-- Contenido principal -->
+    <main class="container py-4">
+        {{#if messages}}
+            {{#each messages}}
+                <div class="alert alert-{{this.type}} alert-dismissible fade show" role="alert">
+                    {{this.message}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {{/each}}
+        {{/if}}
+
+        {{{body}}}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer bg-dark text-white py-4 mt-auto">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Enlaces Rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="/" class="text-white">Inicio</a></li>
+                        <li><a href="/pokemon/new" class="text-white">Nuevo Pokémon</a></li>
+                        <li><a href="/regions" class="text-white">Regiones</a></li>
+                        <li><a href="/types" class="text-white">Tipos</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>&copy; 2024 Pokédex. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="/js/main.js"></script>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const savedTheme = localStorage.getItem('theme');
+
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-theme');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-theme');
+            const isDark = body.classList.contains('dark-theme');
+            themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+    </script>
+    <script>
+    // Inicializar tooltips
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+
+    // Función para eliminar Pokémon
+    function deletePokemon(id) {
+        if (confirm('¿Estás seguro de que quieres eliminar este Pokémon?')) {
+            fetch(`/pokemon/${id}`, { method: 'DELETE' })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.reload();
+                    } else {
+                        alert('Error al eliminar el Pokémon');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al eliminar el Pokémon');
+                });
+        }
+    }
+</script>
+</body>
+</html>
